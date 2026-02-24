@@ -17,13 +17,19 @@
         public void Progress(int amount)
         {
             Console.WriteLine($"Objective: {ObjectiveName.ToUpper()}");
-            CurrentAmount += amount;
-            if(CurrentAmount >= RequiredAmount) 
-            { 
-                CurrentAmount = RequiredAmount;
-                Console.WriteLine($"Objective: {ObjectiveName.ToUpper()} is Complete.");
+            if (amount > RequiredAmount)
+            {
+                throw new InvalidOperationException();
             }
-            Console.WriteLine($"Progression: {CurrentAmount}/{RequiredAmount}");
+            else if (amount <= RequiredAmount)
+            {
+                CurrentAmount = amount;
+                if (CurrentAmount == RequiredAmount) 
+                {
+                Console.WriteLine($"Objective: {ObjectiveName.ToUpper()} is Complete.");
+                }
+            }
+                Console.WriteLine($"Progression: {CurrentAmount}/{RequiredAmount}");
         }
     }
 }
