@@ -39,7 +39,11 @@ namespace QuestProgressTracker
                 IsCompleted = true;
                 Console.WriteLine($"Congratulations! Quest: {QuestName} is Complete :D");
             }
-            else { Console.WriteLine("Your quest is not yet completed."); }
+            else 
+            { 
+                IsCompleted = false;
+                Console.WriteLine("Your quest is not yet completed."); 
+            }
 
         }
 
