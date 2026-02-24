@@ -39,12 +39,17 @@ namespace QuestProgressTracker
             {
                 AllObjectivesComplete = true;
             }
-            else { Console.WriteLine("Your quest is not yet completed."); }
+            else 
+            { 
+                AllObjectivesComplete = false;
+                IsCompleted = false;
+                Console.WriteLine("Your quest is not yet completed."); 
+            }
         }
 
         public void TurnIn()
         {
-
+            if (AllObjectivesComplete) { IsCompleted = true; }
         }
 
         public Objective GetObjective(string name)
