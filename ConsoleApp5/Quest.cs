@@ -1,29 +1,57 @@
-﻿namespace QuestProgressTracker
+﻿using System.Runtime.InteropServices;
+
+namespace QuestProgressTracker
 {
     public class Quest
     {
-        private string v;
-
-        public Quest(string v)
-        {
-            this.v = v;
-        }
-
+        public string QuestName { get; set; }
+        public List<Objective> Objectives { get; set; } = new();
         public bool IsCompleted { get; set; }
 
-        public void AddObjective(string v1, int v2)
+        public Quest() {}
+
+        public Quest(string name)
         {
-            throw new NotImplementedException();
+            QuestName = name; 
         }
 
-        public Objective GetObjective(string v)
+
+        public void AddObjective(string name, int requiredAmount)
         {
-            throw new NotImplementedException();
+            Objective newObjective = new(name, requiredAmount);
+            Objectives.Add(newObjective);
         }
 
-        public void ProgressObjective(string v1, int v2)
+        public void ProgressObjective(string name, int amount)
         {
-            throw new NotImplementedException();
+            int uncompleteObjectives = 0;
+
+            foreach (Objective obj in Objectives)
+            {
+                if(obj.ObjectiveName == name) { obj.Progress(amount); }
+                
+                if(obj.CurrentAmount != obj.RequiredAmount) { uncompleteObjectives++; }
+
+            }
+
+            if (uncompleteObjectives == 0)
+            {
+                IsCompleted = true;
+                Console.WriteLine($"Congratulations! Quest: {QuestName} is Complete :D");
+            }
+            else { Console.WriteLine("Your quest is not yet completed."); }
+
         }
+
+        public Objective GetObjective(string name)
+        {
+            foreach (Objective obj in Objectives)
+            {
+                if (obj.ObjectiveName == name) { return obj; }
+            }
+
+            throw new Exception("Objective not found :(");
+        }
+
     }
 }
