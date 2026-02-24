@@ -6,6 +6,7 @@ namespace QuestProgressTracker
     {
         public string QuestName { get; set; }
         public List<Objective> Objectives { get; set; } = new();
+        public bool AllObjectivesComplete { get; set; }
         public bool IsCompleted { get; set; }
 
         public Quest() {}
@@ -36,10 +37,13 @@ namespace QuestProgressTracker
 
             if (uncompleteObjectives == 0)
             {
-                IsCompleted = true;
-                Console.WriteLine($"Congratulations! Quest: {QuestName} is Complete :D");
+                AllObjectivesComplete = true;
             }
             else { Console.WriteLine("Your quest is not yet completed."); }
+        }
+
+        public void TurnIn()
+        {
 
         }
 
